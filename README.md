@@ -173,7 +173,7 @@ Authenticated users get access to a dashboard where they can:
 ---
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/yourusername">Your Name</a>
+  Made with ❤️ by <a href="https://github.com/yourusername">Yash Thakur</a>
 </p>
 
 <p align="center">

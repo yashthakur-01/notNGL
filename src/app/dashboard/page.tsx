@@ -18,7 +18,6 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-
 type acceptMessageForm = z.infer<typeof acceptMessageSchema>;
 
 export type Message = {
@@ -76,7 +75,7 @@ function Dashboard() {
       const axiosError = error as AxiosError<ApiResponse>;
       // console.log("the error has occured: \n", axiosError);
       toast.error(
-        axiosError.response?.data.message || "Unable to fetch the data"
+        axiosError.response?.data.message || "Unable to fetch the data",
       );
     } finally {
       setFetchingIsAccepting(false);
@@ -124,10 +123,10 @@ function Dashboard() {
     }
   };
 
-  const copyToClipboard = async()=>{
+  const copyToClipboard = async () => {
     await navigator.clipboard.writeText(url);
     toast.success("Coppied to Clipboard");
-  }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500">
@@ -150,8 +149,18 @@ function Dashboard() {
             <span className="mr-2">Copy profle link to share others</span>
           </div>
           <div className="flex gap-2 p-3 my-6 mt-1">
-            <Input className="p-3" value={url} onChange={()=>undefined} contentEditable="false"></Input>
-            <Button className="p-3 bg-pink-500 hover:bg-pink-600" onClick={copyToClipboard}>Copy</Button>
+            <Input
+              className="p-3"
+              value={url}
+              onChange={() => undefined}
+              contentEditable="false"
+            ></Input>
+            <Button
+              className="p-3 bg-pink-500 hover:bg-pink-600"
+              onClick={copyToClipboard}
+            >
+              Copy
+            </Button>
           </div>
           <Switch
             className="mr-2"

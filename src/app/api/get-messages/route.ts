@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
     try {
 
         const existingUser = await UserModel.aggregate([
-            { $match: { _id:new Types.ObjectId(userId) } },
+            { $match: { _id: new Types.ObjectId(userId) } },
             { $unwind: '$messages' },
             { $sort: { 'messages.createdAt': -1 } },
             { $group: { _id: '$_id', messages: { $push: '$messages' } } }

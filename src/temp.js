@@ -7,7 +7,6 @@ import { UserModel } from "./model/user.model";
 // console.log("ass")
 // console.log("Key from lib/resend:", process.env.RESEND_API_KEY ? "Found" : "Not Found");
 
-
 connectToDB();
 
 await UserModel.updateOne(
@@ -18,46 +17,47 @@ await UserModel.updateOne(
         $each: [
           {
             content: "Welcome to the platform 🎉",
-            createdAt: new Date()
+            createdAt: new Date(),
           },
           {
             content: "Your account has been successfully verified.",
-            createdAt: new Date()
+            createdAt: new Date(),
           },
           {
             content: "You have a new notification waiting for you.",
-            createdAt: new Date()
+            createdAt: new Date(),
           },
           {
-            content: "This is a test message to check text wrapping inside the card component.",
-            createdAt: new Date()
+            content:
+              "This is a test message to check text wrapping inside the card component.",
+            createdAt: new Date(),
           },
           {
             content: "Your password was changed recently.",
-            createdAt: new Date()
+            createdAt: new Date(),
           },
           {
             content: "A new login was detected from a different device.",
-            createdAt: new Date()
+            createdAt: new Date(),
           },
           {
             content: "Your profile information has been updated.",
-            createdAt: new Date()
+            createdAt: new Date(),
           },
           {
             content: "Reminder: Complete your pending tasks.",
-            createdAt: new Date()
+            createdAt: new Date(),
           },
           {
             content: "System maintenance is scheduled for tonight at 11 PM.",
-            createdAt: new Date()
+            createdAt: new Date(),
           },
           {
             content: "Thank you for using our application 😊",
-            createdAt: new Date()
-          }
-        ]
-      }
-    }
-  }
+            createdAt: new Date(),
+          },
+        ],
+      },
+    },
+  },
 );

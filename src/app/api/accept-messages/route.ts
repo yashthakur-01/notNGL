@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
 
     const session = await auth();
-    const  user  = session?.user;
+    const user = session?.user;
 
     // console.log(session,user);
 
@@ -36,11 +36,11 @@ export async function POST(request: NextRequest) {
 
         const updatedUser = await UserModel.findByIdAndUpdate(
             userId,
-            {isAcceptingMessage:acceptMessage},
-            {new:true}
+            { isAcceptingMessage: acceptMessage },
+            { new: true }
         )
 
-        if(!updatedUser){
+        if (!updatedUser) {
             return NextResponse.json({
                 success: false,
                 message: "Unable to update the message accepting status"
@@ -48,9 +48,9 @@ export async function POST(request: NextRequest) {
         }
 
         return NextResponse.json({
-            success:true,
-            message:"user message accepting status updated successfully"
-        },{status:201})
+            success: true,
+            message: "user message accepting status updated successfully"
+        }, { status: 201 })
 
 
     } catch (error) {
@@ -65,9 +65,9 @@ export async function POST(request: NextRequest) {
 }
 
 
-export async function GET(request: NextRequest){
+export async function GET(request: NextRequest) {
     const session = await auth();
-    const  user  = session?.user;
+    const user = session?.user;
 
     if (!session || !user) {
         return NextResponse.json({
@@ -88,26 +88,26 @@ export async function GET(request: NextRequest){
 
         const existingUser = await UserModel.findById(userId);
 
-        if(!existingUser){
+        if (!existingUser) {
             return NextResponse.json({
-                success:false,
-                message:"User doesnot exist"
-            },{status:404})
+                success: false,
+                message: "User doesnot exist"
+            }, { status: 404 })
         }
 
         return NextResponse.json({
-            success:true,
-            message:"User accept message status fetched successfully",
-            isAcceptingMessage:existingUser.isAcceptingMessage
-        },{status:201})
-        
+            success: true,
+            message: "User accept message status fetched successfully",
+            isAcceptingMessage: existingUser.isAcceptingMessage
+        }, { status: 201 })
+
     } catch (error) {
         // console.log("error occured:\n",error);
-        if(error instanceof Error){
+        if (error instanceof Error) {
             return NextResponse.json({
-                success:false,
-                message:error.message
-            },{status:500})
+                success: false,
+                message: error.message
+            }, { status: 500 })
         }
     }
 }

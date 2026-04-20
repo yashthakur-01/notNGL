@@ -43,19 +43,19 @@ function SignupPage() {
           setIsCheckingUsername(true);
           setUsernameMessage("");
           const res = await axios.get(
-            `/api/check-unique-username?username=${username}`
+            `/api/check-unique-username?username=${username}`,
           );
 
           // console.log(res);
 
           setUsernameMessage(res?.data.message);
-        }else{
-            setUsernameMessage("");
+        } else {
+          setUsernameMessage("");
         }
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>;
         setUsernameMessage(
-          axiosError.response?.data.message ?? "Error Checking Username"
+          axiosError.response?.data.message ?? "Error Checking Username",
         );
         // console.log(error)
       } finally {
@@ -86,7 +86,6 @@ function SignupPage() {
     setIsSubmitting(true);
     try {
       const res = await axios.post("/api/sign-up", data);
-
 
       // console.log(res.data.message);
       toast.success(res.data.message);
@@ -120,18 +119,20 @@ function SignupPage() {
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-3">
             Join Us
           </h1>
-               
-          <div  className="width-auto rounded-4xl self-center" >
-              <Image
-                src="/nglzoom.svg"
-                alt="logo"
-                loading="eager"
-                width={140}
-                height={140}
-                className="object-"
-              />
+
+          <div className="width-auto rounded-4xl self-center">
+            <Image
+              src="/nglzoom.svg"
+              alt="logo"
+              loading="eager"
+              width={140}
+              height={140}
+              className="object-"
+            />
           </div>
-          <p className="mt-3 text-pink-600 text-xl font-medium my-6">Signup to receive unwanted opinions</p>
+          <p className="mt-3 text-pink-600 text-xl font-medium my-6">
+            Signup to receive unwanted opinions
+          </p>
         </div>
         <Form {...register}>
           <form
@@ -146,7 +147,7 @@ function SignupPage() {
                   <FormLabel>Username</FormLabel>
                   <FormControl>
                     <Input
-                    className="focus:shadow-sm focus:ring-2 focus:ring-pink-400"
+                      className="focus:shadow-sm focus:ring-2 focus:ring-pink-400"
                       placeholder="Username"
                       {...field}
                       onChange={(e) => {
@@ -159,9 +160,9 @@ function SignupPage() {
                   {!isCheckingUsername && usernameMessage && (
                     <p
                       className={`text-sm ${
-                        usernameMessage === 'Username is available'
-                          ? 'text-green-500'
-                          : 'text-red-500'
+                        usernameMessage === "Username is available"
+                          ? "text-green-500"
+                          : "text-red-500"
                       }`}
                     >
                       {usernameMessage}
@@ -178,10 +179,7 @@ function SignupPage() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="email"
-                      {...field}
-                    />
+                    <Input placeholder="email" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -195,11 +193,7 @@ function SignupPage() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      {...field}
-                    />
+                    <Input type="password" placeholder="Password" {...field} />
                   </FormControl>
 
                   <FormMessage />

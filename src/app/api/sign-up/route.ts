@@ -7,12 +7,12 @@ import { Types } from "mongoose";
 
 
 export interface UserInterface {
-  _id?: Types.ObjectId; // ✅ FIX
-  email?: string;
-  username?: string;
-  password?: string;
-  isVerified?: boolean;
-  isAcceptingMessage?: boolean;
+    _id?: Types.ObjectId; // ✅ FIX
+    email?: string;
+    username?: string;
+    password?: string;
+    isVerified?: boolean;
+    isAcceptingMessage?: boolean;
 }
 
 export async function POST(request: Request) {
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
             username, isVerified: true
         })
 
-        if (existingUserVerifiedByUsername) { 
+        if (existingUserVerifiedByUsername) {
             return Response.json({
                 success: false,
                 message: 'Username is already taken'
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
                 existingUserByEmail.password = hashedPass;
 
                 existingUserByEmail.verifyCode = verifyCode;
-                
+
                 existingUserByEmail.verifyCodeExpiry = expiryDate;
 
                 await existingUserByEmail.save();

@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 import { UserInterface } from "./app/api/sign-up/route";
 import { SigninCode } from "./types/signin_codes";
 
-    
+
 export const { auth, handlers, signIn, signOut } = NextAuth({
   providers:
     [

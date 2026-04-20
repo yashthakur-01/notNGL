@@ -129,49 +129,51 @@ function Dashboard() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500">
+    <div className="flex justify-center items-start min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500 p-3 sm:p-5">
       <Button
         asChild
         variant="outline"
-        className="fixed top-6 left-6 z-50 gap-2 bg-white/95 shadow-md backdrop-blur"
+        className="fixed top-3 left-3 sm:top-6 sm:left-6 z-50 h-8 sm:h-9 px-2.5 sm:px-4 gap-1.5 sm:gap-2 text-xs sm:text-sm bg-white/95 shadow-md backdrop-blur"
       >
         <Link href="/">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
       </Button>
-      <div className="min-h-[90vh] w-[90vw] mx-auto my-auto p-8 bg-white rounded-lg shadow-md ">
+      <div className="min-h-[90vh] w-full max-w-7xl mx-auto my-auto pt-14 sm:pt-8 p-4 sm:p-8 bg-white rounded-lg shadow-md ">
         <Navbar></Navbar>
         <Separator className="my-6" orientation="horizontal" />
 
-        <div className="gap-5 p-4 mt-3">
-          <div className="p-2 text-2xl font-bold">
+        <div className="gap-5 p-2 sm:p-4 mt-3">
+          <div className="p-1 sm:p-2 text-lg sm:text-2xl font-bold">
             <span className="mr-2">Copy profle link to share others</span>
           </div>
-          <div className="flex gap-2 p-3 my-6 mt-1">
+          <div className="flex flex-col sm:flex-row gap-2 p-1 sm:p-3 my-4 sm:my-6 mt-1">
             <Input
-              className="p-3"
+              className="p-3 text-sm"
               value={url}
               onChange={() => undefined}
               contentEditable="false"
             ></Input>
             <Button
-              className="p-3 bg-pink-500 hover:bg-pink-600"
+              className="p-3 bg-pink-500 hover:bg-pink-600 w-full sm:w-auto"
               onClick={copyToClipboard}
             >
               Copy
             </Button>
           </div>
-          <Switch
-            className="mr-2"
-            {...register("acceptMessages")}
-            checked={acceptMessage}
-            onCheckedChange={onToggle}
-            disabled={fetchingIsAccepting}
-          />
-          <span className="text-lg font-semibold">
-            Accepting Messages: {acceptMessage ? "Yes" : "No"}
-          </span>
+          <div className="flex items-center gap-2 flex-wrap">
+            <Switch
+              className="mr-1"
+              {...register("acceptMessages")}
+              checked={acceptMessage}
+              onCheckedChange={onToggle}
+              disabled={fetchingIsAccepting}
+            />
+            <span className="text-sm sm:text-lg font-semibold">
+              Accepting Messages: {acceptMessage ? "Yes" : "No"}
+            </span>
+          </div>
           <Separator className="my-6" orientation="horizontal" />
         </div>
 

@@ -65,10 +65,10 @@ function VerifyAccount() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+    <div className="flex justify-center items-start sm:items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500 p-3 sm:p-5">
+      <div className="w-full max-w-md p-5 sm:p-8 space-y-6 sm:space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight lg:text-5xl mb-4 sm:mb-6">
             Verify Your Account
           </h1>
           <p className="mb-4">Enter the verification code sent to your email</p>
@@ -94,7 +94,7 @@ function VerifyAccount() {
               )}
             />
             <Button
-              className=" bg-pink-500 p-5 self-center hover:bg-pink-600"
+              className=" bg-pink-500 p-5 w-full sm:w-auto self-center hover:bg-pink-600"
               type="submit"
               disabled={isSubmitting}
             >

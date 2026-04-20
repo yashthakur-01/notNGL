@@ -100,24 +100,24 @@ function Profile() {
   });
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500">
+    <div className="flex justify-center items-start min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500 p-3 sm:p-5">
       <Button
         asChild
         variant="outline"
-        className="fixed top-6 left-6 z-50 gap-2 bg-white/95 shadow-md backdrop-blur"
+        className="fixed top-3 left-3 sm:top-6 sm:left-6 z-50 h-8 sm:h-9 px-2.5 sm:px-4 gap-1.5 sm:gap-2 text-xs sm:text-sm bg-white/95 shadow-md backdrop-blur"
       >
         <Link href="/">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
       </Button>
-      <div className="gap-y-5 min-h-[90vh] w-[90vw] mx-auto my-auto p-8 bg-white rounded-lg shadow-md ">
+      <div className="gap-y-5 min-h-[90vh] w-full max-w-7xl mx-auto my-auto pt-14 sm:pt-8 p-4 sm:p-8 bg-white rounded-lg shadow-md ">
         <WelcomeHeader
           appName="NotNGL"
           subtitle="Say it! I won't tell them"
         ></WelcomeHeader>
         <Separator orientation="horizontal" className="my-4"></Separator>
-        <h1 className="text-2xl my-6 mb-4 font-bold text-gray-800">
+        <h1 className="text-xl sm:text-2xl my-6 mb-4 font-bold text-gray-800 wrap-break-word">
           Send to <span className="text-pink-600">@{params.username}</span>
         </h1>
         <form onSubmit={handleSubmit(sendMessage)} className="space-y-2 mb-5">
@@ -156,12 +156,12 @@ function Profile() {
         <Separator orientation="horizontal" className="my-4"></Separator>
 
         <div className="space-y-3">
-          <div className="flex flex-col items-center justify-between">
-            <p className="my-3.5 mt-0 font-semibold text-gray-700">
+          <div className="flex flex-col items-stretch sm:items-center justify-between">
+            <p className="my-3.5 mt-0 font-semibold text-gray-700 text-center">
               Get AI suggestions
             </p>
             {content.length > 0 && (
-              <div className="grid gap-3">
+              <div className="grid gap-3 w-full max-w-2xl">
                 {" "}
                 {content[0] && (
                   <span
@@ -197,7 +197,7 @@ function Profile() {
               size="sm"
               onClick={askAI}
               disabled={isSuggestingMessages}
-              className="bg-pink-500 mt-2 hover:bg-pink-600"
+              className="bg-pink-500 mt-2 hover:bg-pink-600 w-full sm:w-auto"
             >
               {isSuggestingMessages ? "Thinking..." : "Ask AI"}
             </Button>

@@ -94,7 +94,7 @@ function SignupPage() {
     } catch (error) {
       // console.error("error in signup of user:\n", error);
       const axiosError = error as AxiosError<ApiResponse>;
-      console.log(axiosError);
+      // console.log(axiosError);
       const errorMessage = axiosError.response?.data.message;
       toast.error(errorMessage);
     } finally {
@@ -103,20 +103,20 @@ function SignupPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500">
+    <div className="flex justify-center items-start sm:items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500 p-3 sm:p-5 pt-14 sm:pt-5">
       <Button
         asChild
         variant="outline"
-        className="fixed top-6 left-6 z-50 gap-2 bg-white/95 shadow-md backdrop-blur"
+        className="fixed top-3 left-3 sm:top-6 sm:left-6 z-50 h-8 sm:h-9 px-2.5 sm:px-4 gap-1.5 sm:gap-2 text-xs sm:text-sm bg-white/95 shadow-md backdrop-blur"
       >
         <Link href="/">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
       </Button>
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md p-5 sm:p-8 space-y-6 sm:space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center flex flex-col">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-3">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight lg:text-5xl mb-3">
             Join Us
           </h1>
 
@@ -130,7 +130,7 @@ function SignupPage() {
               className="object-"
             />
           </div>
-          <p className="mt-3 text-pink-600 text-xl font-medium my-6">
+          <p className="mt-3 text-pink-600 text-base sm:text-xl font-medium my-4 sm:my-6">
             Signup to receive unwanted opinions
           </p>
         </div>
@@ -201,7 +201,7 @@ function SignupPage() {
               )}
             />
             <Button
-              className=" bg-pink-500 p-5 self-center hover:bg-pink-600"
+              className=" bg-pink-500 p-5 w-full sm:w-auto self-center hover:bg-pink-600"
               type="submit"
               disabled={isSubmitting}
             >

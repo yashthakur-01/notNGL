@@ -21,7 +21,7 @@ export default function WelcomeHeader({
         />
       </div>
 
-      <div >
+      <div>
         <h2 className="text-2xl sm:text-4xl lg:text-5xl my-1 sm:my-3 font-bold text-gray-800 leading-tight">
           Welcome to <span className="text-pink-600">{appName}</span>
         </h2>

@@ -7,25 +7,23 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-
 export default function Home() {
-const router = useRouter();
-const [username,setUsername]=useState("");
-const [checkingUsername,setCheckingUsername] = useState(false);
+  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [checkingUsername, setCheckingUsername] = useState(false);
 
-const handleEnter = async ()=>{
-
-  try {
-    setCheckingUsername(true);
-    const res = await axios.post("/api/check-username",{username})
-    router.push(`/profile/${username}`)
-  } catch (error) {
-    const axiosError = error as AxiosError<ApiResponse>
-    toast.error(axiosError.response?.data.message);
-  }finally{
-    setCheckingUsername(false);
-  }
-}
+  const handleEnter = async () => {
+    try {
+      setCheckingUsername(true);
+      const res = await axios.post("/api/check-username", { username });
+      router.push(`/profile/${username}`);
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast.error(axiosError.response?.data.message);
+    } finally {
+      setCheckingUsername(false);
+    }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500 p-3 sm:p-5">
@@ -65,13 +63,13 @@ const handleEnter = async ()=>{
                 Already have a NotNGL Username?
               </h2>
               <p className="text-sm text-gray-600">
-                Paste the profile Username below and send an anonymous message — no
-                sign-up required.
+                Paste the profile Username below and send an anonymous message —
+                no sign-up required.
               </p>
               <input
                 type="text"
                 placeholder="Paste Username here"
-                onChange={(e)=>(setUsername(e.target.value))}
+                onChange={(e) => setUsername(e.target.value)}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {

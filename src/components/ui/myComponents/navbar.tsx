@@ -14,7 +14,13 @@ export default function Navbar() {
     <div className="w-full border-b bg-white shadow-md bg-linear-to-r from-pink-50 to-orange-50 border border-pink-100">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2 sm:px-6 sm:py-0 gap-2">
         <Link href="#" className="flex items-center gap-2">
-          <Image src="/ngl.svg" alt="logo" width={78} height={78} className="sm:w-[100px] sm:h-[100px]"></Image>
+          <Image
+            src="/ngl.svg"
+            alt="logo"
+            width={78}
+            height={78}
+            className="sm:w-[100px] sm:h-[100px]"
+          ></Image>
         </Link>
         <div className="flex items-center gap-2 sm:gap-4">
           {session ? (

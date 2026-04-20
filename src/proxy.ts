@@ -25,10 +25,10 @@ export async function proxy(request: NextRequest) {
   // Everyone can access landing page and other public routes.
   return NextResponse.next();
 }
- 
+
 // Alternatively, you can use a default export:
 // export default function proxy(request: NextRequest) { ... }
- 
+
 export const config = {
   matcher: [
     '/sign-in',

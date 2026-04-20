@@ -57,7 +57,13 @@ export default function Login() {
         email: data.email,
         password: data.password,
         redirect: false,
+        callbackUrl: "/dashboard",
       });
+
+      if (!res) {
+        toast.error("Login failed. Please try again.");
+        return;
+      }
 
       if (res?.error) {
         const error_message = SIGNIN_ERROR_MESSAGES[res.error];
@@ -66,8 +72,8 @@ export default function Login() {
       }
 
       toast.success("Login successful");
-      // Hard navigation avoids occasional client-router/session timing races.
-      window.location.assign("/dashboard");
+      // Prefer Auth.js returned URL in production (handles domain/base URL correctly).
+      window.location.assign(res?.url ?? "/dashboard");
     } finally {
       setIsSubmitting(false);
     }

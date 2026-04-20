@@ -16,14 +16,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 
 export default function Login() {
-  const router = useRouter();
   type SigninForm = z.infer<typeof SignInSchema>;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -53,20 +51,26 @@ export default function Login() {
   };
 
   const onSubmit = async (data: SigninForm) => {
-    const res = await signIn("credentials", {
-      email: watch("email"),
-      password: watch("password"),
-      redirect: false,
-    });
-    // console.log(res);
-    if (res?.error) {
-      const error_message = SIGNIN_ERROR_MESSAGES[res.error];
-      toast.error(String(error_message) ?? "Login Failed");
-      return;
-    }
+    try {
+      setIsSubmitting(true);
+      const res = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
 
-    toast.success("Login successful");
-    router.push("/dashboard");
+      if (res?.error) {
+        const error_message = SIGNIN_ERROR_MESSAGES[res.error];
+        toast.error(String(error_message) ?? "Login Failed");
+        return;
+      }
+
+      toast.success("Login successful");
+      // Hard navigation avoids occasional client-router/session timing races.
+      window.location.assign("/dashboard");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

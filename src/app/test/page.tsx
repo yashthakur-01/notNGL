@@ -15,20 +15,18 @@ export default function test() {
       const reader = res?.body!.getReader();
       const decoder = new TextDecoder();
 
-      while(true){
-        const {value, done} = await reader.read();
-        if(done){
-            break;
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) {
+          break;
         }
-        setContent((prev)=> prev + decoder.decode(value,{stream:true}))
+        setContent((prev) => prev + decoder.decode(value, { stream: true }));
       }
-    } catch (error:any) {
-        // console.log(error);
-        setContent(error);
+    } catch (error: any) {
+      // console.log(error);
+      setContent(error);
     }
   };
-
-  
 
   return (
     <>

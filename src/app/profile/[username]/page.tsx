@@ -96,7 +96,7 @@ function Profile() {
     defaultValues: {
       content: "",
     },
-    mode:"onChange"
+    mode: "onChange",
   });
 
   return (
@@ -112,8 +112,11 @@ function Profile() {
         </Link>
       </Button>
       <div className="gap-y-5 min-h-[90vh] w-[90vw] mx-auto my-auto p-8 bg-white rounded-lg shadow-md ">
-        <WelcomeHeader appName="NotNGL" subtitle="Say it! I won't tell them" ></WelcomeHeader>
-        <Separator orientation="horizontal" className="my-4"></Separator>             
+        <WelcomeHeader
+          appName="NotNGL"
+          subtitle="Say it! I won't tell them"
+        ></WelcomeHeader>
+        <Separator orientation="horizontal" className="my-4"></Separator>
         <h1 className="text-2xl my-6 mb-4 font-bold text-gray-800">
           Send to <span className="text-pink-600">@{params.username}</span>
         </h1>
@@ -150,42 +153,43 @@ function Profile() {
           </Button>
         </form>
 
-        <Separator orientation="horizontal" className="my-4"></Separator>             
+        <Separator orientation="horizontal" className="my-4"></Separator>
 
         <div className="space-y-3">
           <div className="flex flex-col items-center justify-between">
-            <p className="my-3.5 mt-0 font-semibold text-gray-700">Get AI suggestions</p>
+            <p className="my-3.5 mt-0 font-semibold text-gray-700">
+              Get AI suggestions
+            </p>
             {content.length > 0 && (
               <div className="grid gap-3">
-                      {" "}
-                      {content[0] && (
-                        <span
-                          onClick={() => setValue("content", content[0])}
-                          className="cursor-pointer rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 hover:bg-pink-50 hover:border-pink-400 transition"
-                        >
-                          {" "}
-                          {content[0]}{" "}
-                        </span>
-                      )}{" "}
-                      {content[1] && (
-                        <span
-                          onClick={() => setValue("content", content[1])}
-                          className="cursor-pointer rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 hover:bg-pink-50 hover:border-pink-400 transition"
-                        >
-                          {" "}
-                          {content[1]}{" "}
-                        </span>
-                      )}{" "}
-                      {content[2] && (
-                        <span
-                          onClick={() => setValue("content", content[2])}
-                          className="cursor-pointer rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 hover:bg-pink-50 hover:border-pink-400 transition"
-                        >
-                          {" "}
-                          {content[2]}{" "}
-                        </span>
-                      )}{" "}
-                
+                {" "}
+                {content[0] && (
+                  <span
+                    onClick={() => setValue("content", content[0])}
+                    className="cursor-pointer rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 hover:bg-pink-50 hover:border-pink-400 transition"
+                  >
+                    {" "}
+                    {content[0]}{" "}
+                  </span>
+                )}{" "}
+                {content[1] && (
+                  <span
+                    onClick={() => setValue("content", content[1])}
+                    className="cursor-pointer rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 hover:bg-pink-50 hover:border-pink-400 transition"
+                  >
+                    {" "}
+                    {content[1]}{" "}
+                  </span>
+                )}{" "}
+                {content[2] && (
+                  <span
+                    onClick={() => setValue("content", content[2])}
+                    className="cursor-pointer rounded-lg border border-gray-200 bg-gray-50 p-3 text-sm text-gray-700 hover:bg-pink-50 hover:border-pink-400 transition"
+                  >
+                    {" "}
+                    {content[2]}{" "}
+                  </span>
+                )}{" "}
               </div>
             )}
 

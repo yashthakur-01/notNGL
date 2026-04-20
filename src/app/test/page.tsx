@@ -23,7 +23,7 @@ export default function test() {
         setContent((prev)=> prev + decoder.decode(value,{stream:true}))
       }
     } catch (error:any) {
-        console.log(error);
+        // console.log(error);
         setContent(error);
     }
   };

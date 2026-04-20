@@ -6,7 +6,6 @@ import { UserModel } from "./model/user.model";
 import bcrypt from "bcryptjs";
 import { UserInterface } from "./app/api/sign-up/route";
 import { SigninCode } from "./types/signin_codes";
-import { error } from "console";
 
     
 export const { auth, handlers, signIn, signOut } = NextAuth({
@@ -55,7 +54,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
             return { id: user._id?.toString(), username: user.username, email: user.email, isVerified: user.isVerified, isAcceptingMessages: user.isAcceptingMessage };
 
           } catch (err: any) {
-            console.log("error occured:\n",err)
+            // console.log("error occured:\n",err)
             throw new CredentialsSignin(SigninCode.SERVER_ERROR);
           }
         }

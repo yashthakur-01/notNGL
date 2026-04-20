@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { SignInSchema } from "@/schemas/signInSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -58,7 +58,7 @@ export default function Login() {
       password: watch("password"),
       redirect: false,
     });
-    console.log(res);
+    // console.log(res);
     if (res?.error) {
       const error_message = SIGNIN_ERROR_MESSAGES[res.error];
       toast.error(String(error_message) ?? "Login Failed");
@@ -71,6 +71,16 @@ export default function Login() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500">
+      <Button
+        asChild
+        variant="outline"
+        className="fixed top-6 left-6 z-50 gap-2 bg-white/95 shadow-md backdrop-blur"
+      >
+        <Link href="/">
+          <ArrowLeft className="h-4 w-4" />
+          Back to Home
+        </Link>
+      </Button>
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center flex flex-col">
           <h1 className="text-xl font-extrabold tracking-tight lg:text-2xl mb-3">

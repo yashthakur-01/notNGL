@@ -23,7 +23,7 @@ export async function GET(request: NextRequest){
             },{status:400});
         }
         const result = UsernameQuerySchema.safeParse({username:checkUsername});
-        console.log(result);
+        // console.log(result);
 
         if(!result.success){
             const usernameError = result.error.format().username?._errors ?? [];
@@ -46,7 +46,7 @@ export async function GET(request: NextRequest){
         });
 
     } catch (error: any) {
-        console.log(error);
+        // console.log(error);
         return NextResponse.json({success:false,message:error.message},{status:500});
     }
 }

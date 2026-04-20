@@ -6,6 +6,8 @@ import { messageSchema } from "@/schemas/messageSchema";
 import { ApiResponse } from "@/types/apiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -32,11 +34,11 @@ function Profile() {
         username,
       });
 
-      console.log(res);
+      // console.log(res);
       toast.success(res.data.message);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      console.log("error occured: \n", error);
+      // console.log("error occured: \n", error);
       toast.error(axiosError.response?.data.message);
     } finally {
       setIsSendingMessage(false);
@@ -76,7 +78,7 @@ function Profile() {
         setContent((prev) => [...prev, buffer]);
       }
     } catch (error: any) {
-      console.log(error);
+      // console.log(error);
       setContent(error);
     } finally {
       setIsSuggestingMessages(false);
@@ -99,6 +101,16 @@ function Profile() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500">
+      <Button
+        asChild
+        variant="outline"
+        className="fixed top-6 left-6 z-50 gap-2 bg-white/95 shadow-md backdrop-blur"
+      >
+        <Link href="/">
+          <ArrowLeft className="h-4 w-4" />
+          Back to Home
+        </Link>
+      </Button>
       <div className="gap-y-5 min-h-[90vh] w-[90vw] mx-auto my-auto p-8 bg-white rounded-lg shadow-md ">
         <WelcomeHeader appName="NotNGL" subtitle="Say it! I won't tell them" ></WelcomeHeader>
         <Separator orientation="horizontal" className="my-4"></Separator>             

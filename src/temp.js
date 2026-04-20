@@ -4,8 +4,8 @@ import { connectToDB } from "./lib/dbConnect";
 import { UserModel } from "./model/user.model";
 
 // dotenv.config();
-console.log("ass")
-console.log("Key from lib/resend:", process.env.RESEND_API_KEY ? "Found" : "Not Found");
+// console.log("ass")
+// console.log("Key from lib/resend:", process.env.RESEND_API_KEY ? "Found" : "Not Found");
 
 
 connectToDB();

@@ -2,7 +2,7 @@ import { connectToDB } from "@/lib/dbConnect";
 import { UserModel } from "@/model/user.model";
 import bcrypt from 'bcryptjs';
 
-import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
+import { sendVerificationEmailGmail } from "@/helpers/sendVerificationEmailGmail";
 import { Types } from "mongoose";
 
 
@@ -89,7 +89,7 @@ export async function POST(request: Request) {
 
         //send verification email
 
-        const emailResponse = await sendVerificationEmail(email, username, verifyCode)
+        const emailResponse = await sendVerificationEmailGmail(email, username, verifyCode)
 
         if (!emailResponse.success) {
             return Response.json({
@@ -111,7 +111,7 @@ export async function POST(request: Request) {
 
 
     } catch (err) {
-        console.error('Error registering user', err)
+        // console.error('Error registering user', err)
         return Response.json({
             success: false,
             message: 'Error registering User'

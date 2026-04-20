@@ -12,7 +12,7 @@ export async function connectToDB(): Promise <void>{
 
     try{
         const mongo_uri = process.env.MONGO_URI;
-        console.log("mongo_uri: ",mongo_uri);
+        // console.log("mongo_uri: ",mongo_uri);
         //promise is maintained so that multiple request donot make their independent connection request initially when the connection is not established and use the same promise/connection request.
         if(!cached.promise){
             cached.promise = mongoose.connect( mongo_uri || '')
@@ -22,7 +22,7 @@ export async function connectToDB(): Promise <void>{
         return cached.conn;
 
     }catch(err){
-        console.log("error occured. unable to connect", err)
+        // console.log("error occured. unable to connect", err)
         process.exit(1);
     }
     

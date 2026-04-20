@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -46,7 +46,7 @@ function SignupPage() {
             `/api/check-unique-username?username=${username}`
           );
 
-          console.log(res);
+          // console.log(res);
 
           setUsernameMessage(res?.data.message);
         }else{
@@ -57,7 +57,7 @@ function SignupPage() {
         setUsernameMessage(
           axiosError.response?.data.message ?? "Error Checking Username"
         );
-        console.log(error)
+        // console.log(error)
       } finally {
         setIsCheckingUsername(false);
       }
@@ -82,18 +82,18 @@ function SignupPage() {
   } = register;
 
   const onSubmit = async (data: FormData) => {
-    console.log(data);
+    // console.log(data);
     setIsSubmitting(true);
     try {
       const res = await axios.post("/api/sign-up", data);
 
 
-      console.log(res.data.message);
+      // console.log(res.data.message);
       toast.success(res.data.message);
 
       router.push(`/verify/${data.username}`);
     } catch (error) {
-      console.error("error in signup of user:\n", error);
+      // console.error("error in signup of user:\n", error);
       const axiosError = error as AxiosError<ApiResponse>;
       console.log(axiosError);
       const errorMessage = axiosError.response?.data.message;
@@ -105,6 +105,16 @@ function SignupPage() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500">
+      <Button
+        asChild
+        variant="outline"
+        className="fixed top-6 left-6 z-50 gap-2 bg-white/95 shadow-md backdrop-blur"
+      >
+        <Link href="/">
+          <ArrowLeft className="h-4 w-4" />
+          Back to Home
+        </Link>
+      </Button>
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center flex flex-col">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-3">

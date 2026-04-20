@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
         }, { status: 201 });
 
     } catch (error) {
-        console.log("error occured:\n", error);
+        // console.log("error occured:\n", error);
         if (error instanceof Error) {
             return NextResponse.json({
                 message: error.message,

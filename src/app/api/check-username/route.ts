@@ -20,7 +20,7 @@ export async function POST(request: NextRequest){
         return NextResponse.json({success:true,message:"User is valid"},{status:200});
         
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         if(error instanceof Error){
         return NextResponse.json({success:false,message:error.message},{status:500});
             

@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     const session = await auth();
     const  user  = session?.user;
 
-    console.log(session,user);
+    // console.log(session,user);
 
     if (!session || !user) {
         return NextResponse.json({
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
 
 
     } catch (error) {
-        console.log("error occured.\n", error);
+        // console.log("error occured.\n", error);
         if (error instanceof Error) {
             return NextResponse.json({
                 success: false,
@@ -78,7 +78,7 @@ export async function GET(request: NextRequest){
         }, { status: 401 })
     }
 
-    console.log(session,user);
+    // console.log(session,user);
 
     await connectToDB();
 
@@ -102,7 +102,7 @@ export async function GET(request: NextRequest){
         },{status:201})
         
     } catch (error) {
-        console.log("error occured:\n",error);
+        // console.log("error occured:\n",error);
         if(error instanceof Error){
             return NextResponse.json({
                 success:false,

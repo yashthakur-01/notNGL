@@ -7,7 +7,8 @@ import { acceptMessageSchema } from "@/schemas/acceptMesssageSchema";
 import { ApiResponse } from "@/types/apiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
-import { Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -60,7 +61,7 @@ function Dashboard() {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message);
       }
-      console.log("error occured:\n", error);
+      // console.log("error occured:\n", error);
     } finally {
       setFetchingIsAccepting(false);
     }
@@ -73,7 +74,7 @@ function Dashboard() {
       setValue("acceptMessages", res.data.isAcceptingMessage);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      console.log("the error has occured: \n", axiosError);
+      // console.log("the error has occured: \n", axiosError);
       toast.error(
         axiosError.response?.data.message || "Unable to fetch the data"
       );
@@ -86,11 +87,11 @@ function Dashboard() {
     try {
       setIsLoadingMessages(true);
       const res = await axios.get("/api/get-messages");
-      console.log(res);
+      // console.log(res);
       setMessages(res?.data.messages);
-      console.log(messages);
+      // console.log(messages);
     } catch (error: any) {
-      console.log(error.response?.data.message);
+      // console.log(error.response?.data.message);
       toast.error("Error loading messages");
     } finally {
       setIsLoadingMessages(false);
@@ -115,10 +116,10 @@ function Dashboard() {
   const onMessageDelete = async (messageId: string) => {
     try {
       const res = await axios.post("/api/delete-message", { messageId });
-      console.log(res);
+      // console.log(res);
       setMessages(res?.data.messages);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("error deleting message");
     }
   };
@@ -130,6 +131,16 @@ function Dashboard() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-fuchsia-500 via-pink-500 to-orange-500">
+      <Button
+        asChild
+        variant="outline"
+        className="fixed top-6 left-6 z-50 gap-2 bg-white/95 shadow-md backdrop-blur"
+      >
+        <Link href="/">
+          <ArrowLeft className="h-4 w-4" />
+          Back to Home
+        </Link>
+      </Button>
       <div className="min-h-[90vh] w-[90vw] mx-auto my-auto p-8 bg-white rounded-lg shadow-md ">
         <Navbar></Navbar>
         <Separator className="my-6" orientation="horizontal" />

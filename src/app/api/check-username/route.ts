@@ -10,14 +10,14 @@ export async function POST(request: NextRequest) {
     if (!username || !reqBody) {
         return NextResponse.json({ success: false, message: "enter username" }, { status: 400 });
     }
-    connectToDB()
+    await connectToDB();
     try {
         const user = await UserModel.findOne({ username, isVerified: true });
         if (!user) {
-            return NextResponse.json({ success: false, message: "enter a valid username" }, { status: 404 });
+            return NextResponse.json({ success: true, message: "username is valid" }, { status: 200 });
         }
 
-        return NextResponse.json({ success: true, message: "User is valid" }, { status: 200 });
+        return NextResponse.json({ success: false, message: "username is already taken" }, { status: 400 });
 
     } catch (error) {
         // console.log(error);

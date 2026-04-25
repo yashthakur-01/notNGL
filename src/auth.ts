@@ -1,5 +1,4 @@
 import NextAuth, { CredentialsSignin } from "next-auth"
-import GitHub from "next-auth/providers/github"
 import Credentials from "next-auth/providers/credentials"
 import { connectToDB } from "./lib/dbConnect";
 import { UserModel } from "./model/user.model";

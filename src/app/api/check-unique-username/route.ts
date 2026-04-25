@@ -35,9 +35,10 @@ export async function GET(request: NextRequest) {
 
         const { username } = result.data;
 
-        const ExistingUserByUsername = await UserModel.findOne({ username, isVerified: true });
+        // Only block usernames that belong to verified users
+        const ExistingVerifiedUser = await UserModel.findOne({ username, isVerified: true });
 
-        if (ExistingUserByUsername) {
+        if (ExistingVerifiedUser) {
             return NextResponse.json({ success: false, message: "username already exists" }, { status: 400 });
         }
 

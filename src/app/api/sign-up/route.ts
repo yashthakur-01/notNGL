@@ -19,15 +19,13 @@ export async function POST(request: Request) {
 
     await connectToDB();
 
+
     try {
-
         const { username, email, password } = await request.json();
+        console.log("[SIGNUP] Received:", { username, email, password });
 
-        const existingUserVerifiedByUsername = await UserModel.findOne({
-            username, isVerified: true
-        })
-
-        if (existingUserVerifiedByUsername) {
+        const existingVerifiedUser = await UserModel.findOne({ username, isVerified: true });
+        if (existingVerifiedUser) {
             return Response.json({
                 success: false,
                 message: 'Username is already taken'
@@ -36,13 +34,17 @@ export async function POST(request: Request) {
             })
         }
 
-        const existingUserByEmail = await UserModel.findOne({ email })
+        // Always generate code and expiry ONCE per request
+        const verifyCode = Math.floor(100000 + Math.random() * 900000).toString().padStart(6, '0');
+        const expiryDate = new Date();
+        expiryDate.setHours(expiryDate.getHours() + 1);
+        console.log("[SIGNUP] verifyCode, expiryDate:", verifyCode, expiryDate);
 
-        const verifyCode = Math.floor(100000 + Math.random() * 900000).toString()
-
+        const existingUserByEmail = await UserModel.findOne({ email });
+        let userToEmail;
         if (existingUserByEmail) {
-
             if (existingUserByEmail.isVerified) {
+                console.log("[SIGNUP] Existing verified user:", { username, email });
                 return Response.json({
                     success: false,
                     message: 'User already exist with this email.'
@@ -50,29 +52,18 @@ export async function POST(request: Request) {
                     status: 400
                 })
             } else {
-
-                const hashedPass = await bcrypt.hash(password, 10)
-
-                const expiryDate = new Date()
-                expiryDate.setHours(expiryDate.getHours() + 1)
-
+                const hashedPass = await bcrypt.hash(password, 10);
+                // Always update both code and expiry
                 existingUserByEmail.password = hashedPass;
-
                 existingUserByEmail.verifyCode = verifyCode;
-
                 existingUserByEmail.verifyCodeExpiry = expiryDate;
-
+                existingUserByEmail.username = username; 
                 await existingUserByEmail.save();
-
-
+                userToEmail = existingUserByEmail;
+                console.log("[SIGNUP] Updated existing user:", { username, email, verifyCode, expiryDate });
             }
-
         } else {
-            const hashedPass = await bcrypt.hash(password, 10)
-
-            const expiryDate = new Date()
-            expiryDate.setHours(expiryDate.getHours() + 1)
-
+            const hashedPass = await bcrypt.hash(password, 10);
             const newUser = new UserModel({
                 username,
                 email,
@@ -82,15 +73,14 @@ export async function POST(request: Request) {
                 isVerified: false,
                 isAcceptingMessage: true,
                 messages: []
-            })
-
-            await newUser.save()
+            });
+            await newUser.save();
+            userToEmail = newUser;
+            console.log("[SIGNUP] Created new user:", { username, email, verifyCode, expiryDate });
         }
 
-        //send verification email
-
-        const emailResponse = await sendVerificationEmailGmail(email, username, verifyCode)
-
+        // Always send the code that was just saved
+        const emailResponse = await sendVerificationEmailGmail(email, username, verifyCode);
         if (!emailResponse.success) {
             return Response.json({
                 success: false,
@@ -99,19 +89,18 @@ export async function POST(request: Request) {
                 status: 500
             })
         }
-
-        console.log(emailResponse)
-
+        console.log(emailResponse);
         return Response.json({
             success: true,
-            message: 'User Registered Successfully. Please Verify the code through email.'
+            message: 'User Registered Successfully. Please Verify the code through email.',
+            id: userToEmail._id?.toString()
         }, {
             status: 201
+
         })
-
-
     } catch (err) {
-        // console.error('Error registering user', err)
+        console.error('Error registering user', err)
+
         return Response.json({
             success: false,
             message: 'Error registering User'
@@ -119,5 +108,4 @@ export async function POST(request: Request) {
             status: 500
         })
     }
-
 }

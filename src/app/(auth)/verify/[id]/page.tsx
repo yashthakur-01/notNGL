@@ -24,7 +24,7 @@ import { z } from "zod";
 
 function VerifyAccount() {
   const router = useRouter();
-  const params = useParams<{ username: string }>();
+  const params = useParams<{ id: string }>();
 
   type VerifyForm = z.infer<typeof verifySchema>;
   const [isSubmitting, setIsSumbitting] = useState(false);
@@ -47,7 +47,7 @@ function VerifyAccount() {
     try {
       setIsSumbitting(true);
       const response = await axios.post("/api/verify-code", {
-        username: params.username,
+        id: Array.isArray(params.id) ? params.id[0] : params.id,
         verifyCode: watch("code"),
       });
 
@@ -58,7 +58,17 @@ function VerifyAccount() {
       router.push("/sign-in");
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      toast.error(axiosError?.response?.data.message);
+      const status = axiosError?.response?.status;
+      const message = axiosError?.response?.data.message;
+
+      toast.error(message);
+
+      // Username was claimed by someone else — redirect to sign-up
+      if (status === 409) {
+        setTimeout(() => {
+          router.push("/sign-up");
+        }, 2000);
+      }
     } finally {
       setIsSumbitting(false);
     }

@@ -30,7 +30,7 @@ export interface User extends Document {
 }
 
 const UserSchema = new Schema<User>({
-    username: { type: String, required: [true, "Username is required"], trim: true, unique: true },
+    username: { type: String, required: [true, "Username is required"], trim: true },
     email: { type: String, unique: true, match: [/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, " Please enter valid email."], required: [true, "Email is required"] },
     password: { type: String, required: true },
     verifyCode: { type: String, required: true },

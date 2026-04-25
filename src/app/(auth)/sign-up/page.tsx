@@ -90,7 +90,7 @@ function SignupPage() {
       // console.log(res.data.message);
       toast.success(res.data.message);
 
-      router.push(`/verify/${data.username}`);
+      router.push(`/verify/${res.data.id}`);
     } catch (error) {
       // console.error("error in signup of user:\n", error);
       const axiosError = error as AxiosError<ApiResponse>;

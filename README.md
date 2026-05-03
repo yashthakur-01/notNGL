@@ -7,6 +7,9 @@
 <p align="center">
   <strong>Say it. I won't tell them.</strong>
 </p>
+<p align="center">
+  <strong>LINK - https://not-ngl.vercel.app/</strong>
+</p>
 
 <p align="center">
   <a href="#features">Features</a> •

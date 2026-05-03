@@ -4,20 +4,20 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     const reqBody = await request.json();
-    const { username } = reqBody;
+    const username = reqBody?.username?.trim();
 
 
-    if (!username || !reqBody) {
+    if (!username) {
         return NextResponse.json({ success: false, message: "enter username" }, { status: 400 });
     }
     await connectToDB();
     try {
         const user = await UserModel.findOne({ username, isVerified: true });
-        if (!user) {
+        if (user) {
             return NextResponse.json({ success: true, message: "username is valid" }, { status: 200 });
         }
 
-        return NextResponse.json({ success: false, message: "username is already taken" }, { status: 400 });
+        return NextResponse.json({ success: false, message: "invalid username" }, { status: 404 });
 
     } catch (error) {
         // console.log(error);
@@ -25,5 +25,6 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ success: false, message: error.message }, { status: 500 });
 
         }
+        return NextResponse.json({ success: false, message: "Something went wrong" }, { status: 500 });
     }
 }

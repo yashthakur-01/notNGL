@@ -13,13 +13,20 @@ export default function Home() {
   const [checkingUsername, setCheckingUsername] = useState(false);
 
   const handleEnter = async () => {
+    const cleanedUsername = username.trim();
+
+    if (!cleanedUsername) {
+      toast.error("enter username");
+      return;
+    }
+
     try {
       setCheckingUsername(true);
-      const res = await axios.post("/api/check-username", { username });
-      router.push(`/profile/${username}`);
+      await axios.post("/api/check-username", { username: cleanedUsername });
+      router.push(`/profile/${encodeURIComponent(cleanedUsername)}`);
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      toast.error(axiosError.response?.data.message);
+      toast.error(axiosError.response?.data.message ?? "invalid username");
     } finally {
       setCheckingUsername(false);
     }
@@ -70,17 +77,18 @@ export default function Home() {
                 type="text"
                 placeholder="Paste Username here"
                 onChange={(e) => setUsername(e.target.value)}
+                disabled={checkingUsername}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     handleEnter();
                   }
                 }}
-                contentEditable={checkingUsername}
               />
               <button
                 type="button"
                 onClick={handleEnter}
+                disabled={checkingUsername}
                 className="w-full rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-black transition"
               >
                 Continue

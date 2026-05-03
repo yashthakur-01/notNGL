@@ -7,8 +7,7 @@ export default auth((request) => {
   const isAuthenticated = Boolean(request.auth);
   const isAuthRoute = path === "/sign-in" || path === "/sign-up";
   const isVerifyRoute = path.startsWith("/verify");
-  const isProtectedRoute =
-    path.startsWith("/dashboard") || path.startsWith("/profile");
+  const isProtectedRoute = path.startsWith("/dashboard");
 
   if (isAuthenticated && (isAuthRoute || isVerifyRoute)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
@@ -28,8 +27,6 @@ export const config = {
     "/",
     "/dashboard",
     "/dashboard/:path*",
-    "/profile",
-    "/profile/:path*",
     "/verify/:path*",
   ],
 }
